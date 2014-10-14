@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A451C64619ED7FEF00695F94 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A451C64519ED7FEF00695F94 /* UITableViewCell.swift */; };
 		A4824D1219D99DD3009ECF36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4824D1119D99DD3009ECF36 /* AppDelegate.swift */; };
 		A4824D1419D99DD3009ECF36 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4824D1319D99DD3009ECF36 /* FirstViewController.swift */; };
 		A4824D1619D99DD3009ECF36 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4824D1519D99DD3009ECF36 /* SecondViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A451C64519ED7FEF00695F94 /* UITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		A4824D0C19D99DD3009ECF36 /* oTo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = oTo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4824D1019D99DD3009ECF36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4824D1119D99DD3009ECF36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			children = (
 				A4824D1119D99DD3009ECF36 /* AppDelegate.swift */,
 				A4824D1319D99DD3009ECF36 /* FirstViewController.swift */,
+				A451C64519ED7FEF00695F94 /* UITableViewCell.swift */,
 				A4824D1519D99DD3009ECF36 /* SecondViewController.swift */,
 				A4824D1719D99DD3009ECF36 /* Main.storyboard */,
 				A4824D1A19D99DD3009ECF36 /* Images.xcassets */,
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4824D1619D99DD3009ECF36 /* SecondViewController.swift in Sources */,
+				A451C64619ED7FEF00695F94 /* UITableViewCell.swift in Sources */,
 				A4824D1219D99DD3009ECF36 /* AppDelegate.swift in Sources */,
 				A4824D1419D99DD3009ECF36 /* FirstViewController.swift in Sources */,
 			);
@@ -409,6 +413,7 @@
 				A4824D2F19D99DD3009ECF36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A4824D3019D99DD3009ECF36 /* Build configuration list for PBXNativeTarget "oToTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +422,7 @@
 				A4824D3219D99DD3009ECF36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
