@@ -10,6 +10,15 @@ import UIKit
 
 class SecondViewController: UIViewController {
 
+    @IBOutlet weak var txtName: UITextField!
+    
+    @IBOutlet weak var txtDesc: UITextField!
+    
+    @IBOutlet weak var txtAmont: UITextField!
+    
+    @IBOutlet weak var myImage: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -20,6 +29,10 @@ class SecondViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func add_Button(sender: AnyObject) {
+        println("Add Button Clicked")
+        
+    }
 
 }
 
