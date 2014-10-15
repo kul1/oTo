@@ -17,7 +17,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="91" id="UOp-n5-mtX">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="91" id="UOp-n5-mtX" customClass="CustomCell" customModule="oTo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UOp-n5-mtX" id="TF3-yB-hs5">
@@ -50,14 +50,12 @@
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="cellImage" destination="blo-Pg-0xk" id="Pyx-B7-JTT"/>
-                                            <outlet property="centerLabel" destination="NGA-5V-ADd" id="jpl-ly-02L"/>
-                                            <outlet property="leftLabel" destination="RHg-zj-AAk" id="c1k-E7-mee"/>
-                                            <outlet property="rightLabel" destination="g3Y-ZF-nZ7" id="h0O-Ef-7qx"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="9pv-A4-QxB" id="f8t-Yh-Rio"/>
+                                    <outlet property="delegate" destination="9pv-A4-QxB" id="cvf-Ta-02M"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
