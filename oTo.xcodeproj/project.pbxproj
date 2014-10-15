@@ -16,6 +16,7 @@
 		A4824D2A19D99DD3009ECF36 /* oToTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4824D2919D99DD3009ECF36 /* oToTests.swift */; };
 		A498271719EE4857008D63A0 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A498271619EE4857008D63A0 /* CustomCell.swift */; };
 		A498271A19EE4A33008D63A0 /* TaskData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A498271819EE4A33008D63A0 /* TaskData.xcdatamodeld */; };
+		A498271C19EE4C6F008D63A0 /* TaskData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A498271B19EE4C6F008D63A0 /* TaskData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		A4824D2919D99DD3009ECF36 /* oToTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = oToTests.swift; sourceTree = "<group>"; };
 		A498271619EE4857008D63A0 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		A498271919EE4A33008D63A0 /* TaskData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskData.xcdatamodel; sourceTree = "<group>"; };
+		A498271B19EE4C6F008D63A0 /* TaskData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				A4824D1519D99DD3009ECF36 /* SecondViewController.swift */,
 				A4824D1719D99DD3009ECF36 /* Main.storyboard */,
 				A498271819EE4A33008D63A0 /* TaskData.xcdatamodeld */,
+				A498271B19EE4C6F008D63A0 /* TaskData.swift */,
 				A4824D1A19D99DD3009ECF36 /* Images.xcassets */,
 				A4824D1C19D99DD3009ECF36 /* LaunchScreen.xib */,
 				A4824D0F19D99DD3009ECF36 /* Supporting Files */,
@@ -223,6 +226,7 @@
 			files = (
 				A498271A19EE4A33008D63A0 /* TaskData.xcdatamodeld in Sources */,
 				A4824D1619D99DD3009ECF36 /* SecondViewController.swift in Sources */,
+				A498271C19EE4C6F008D63A0 /* TaskData.swift in Sources */,
 				A4824D1219D99DD3009ECF36 /* AppDelegate.swift in Sources */,
 				A498271719EE4857008D63A0 /* CustomCell.swift in Sources */,
 				A4824D1419D99DD3009ECF36 /* FirstViewController.swift in Sources */,

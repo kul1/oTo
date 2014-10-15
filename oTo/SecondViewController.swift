@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SecondViewController: UIViewController {
 
@@ -14,7 +15,7 @@ class SecondViewController: UIViewController {
     
     @IBOutlet weak var txtDesc: UITextField!
     
-    @IBOutlet weak var txtAmont: UITextField!
+    @IBOutlet weak var txtAmount: UITextField!
     
     @IBOutlet weak var myImage: UIImageView!
     
@@ -31,6 +32,27 @@ class SecondViewController: UIViewController {
 
     @IBAction func add_Button(sender: AnyObject) {
         println("Add Button Clicked")
+        // Prepare to access TaskData through TaskManager
+        let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let context:NSManagedObjectContext = appDel.managedObjectContext!
+        let ent = NSEntityDescription.entityForName("TaskData", inManagedObjectContext: context)
+        
+        var newTaskData = TaskData(entity: ent!, insertIntoManagedObjectContext: context)
+        
+        newTaskData.taskName = txtName.text
+        newTaskData.taskDesc = txtDesc.text
+        newTaskData.taskAmnt = txtAmount.text
+        //newTaskData.taskImage = myImage.image
+        context.save(nil)
+        
+        // Clear Text Field
+        
+        txtName.text = ""
+        txtDesc.text = ""
+        txtAmount.text = ""
+
+        
+        
         
     }
 

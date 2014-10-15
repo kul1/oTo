@@ -17,7 +17,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="91" id="UOp-n5-mtX" customClass="CustomCell" customModule="oTo" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="cell" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="91" id="UOp-n5-mtX" customClass="CustomCell" customModule="oTo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UOp-n5-mtX" id="TF3-yB-hs5">
@@ -50,6 +50,12 @@
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cellImage" destination="blo-Pg-0xk" id="6X9-iq-0kd"/>
+                                            <outlet property="centerLabel" destination="NGA-5V-ADd" id="xHE-bI-oOc"/>
+                                            <outlet property="leftLabel" destination="RHg-zj-AAk" id="J3e-jN-p7G"/>
+                                            <outlet property="rightLabel" destination="g3Y-ZF-nZ7" id="UWC-IQ-63r"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -121,7 +127,7 @@
                     <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="myImage" destination="VrK-uh-IhO" id="mY5-Iq-Ccb"/>
-                        <outlet property="txtAmont" destination="RI3-9z-OOu" id="Sbk-da-24e"/>
+                        <outlet property="txtAmount" destination="RI3-9z-OOu" id="oxI-zk-Pkq"/>
                         <outlet property="txtDesc" destination="iI5-Pe-aVm" id="fwy-p8-A8L"/>
                         <outlet property="txtName" destination="NwZ-Vy-FCV" id="qzX-5e-Sk6"/>
                     </connections>

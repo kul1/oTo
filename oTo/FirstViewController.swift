@@ -32,6 +32,17 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: CustomCell = tableView.dequeueReusableCellWithIdentifier("Cell") as CustomCell
+        
+        if indexPath.row % 2 == 0
+        {
+            cell.backgroundColor = UIColor.purpleColor()
+            
+        }
+        else
+        {
+            cell.backgroundColor = UIColor.orangeColor()
+            
+        }
 
         
         
