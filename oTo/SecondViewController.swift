@@ -9,21 +9,62 @@
 import UIKit
 import CoreData
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    @IBOutlet weak var txtName: UITextField!
+    @IBOutlet weak var txtName: UITextField! = UITextField()
     
-    @IBOutlet weak var txtDesc: UITextField!
+    @IBOutlet weak var txtDesc: UITextField! = UITextField()
     
-    @IBOutlet weak var txtAmount: UITextField!
+    @IBOutlet weak var txtAmount: UITextField! = UITextField()
     
-    @IBOutlet weak var myImage: UIImageView!
+    @IBOutlet weak var myImage: UIImageView! = UIImageView()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let tapGestureRecognizer:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "chooseImage:")
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        myImage.addGestureRecognizer(tapGestureRecognizer)
+        myImage.userInteractionEnabled = true
     }
+    
+    func chooseImage(recognizer: UITapGestureRecognizer){
+        let imagePicker:UIImagePickerController = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        self.presentViewController(imagePicker, animated: true , completion: nil)
+    }
+    
+    func scaleImageWith(image:UIImage, newSize:CGSize)->UIImage{
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        image.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
+        
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: NSDictionary!){
+        let pickedImage:UIImage = info.objectForKey(UIImagePickerControllerOriginalImage) as UIImage
+        // smapp picture
+        let smallPicture = scaleImageWith(pickedImage, newSize: CGSizeMake(100, 100))
+        
+        var sizeOfImageView:CGRect = myImage.frame
+        sizeOfImageView.size = smallPicture.size
+        myImage.frame = sizeOfImageView
+        
+        myImage.image = smallPicture
+        picker.dismissViewControllerAnimated(true , completion: nil)
+        
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        picker.dismissViewControllerAnimated(true , completion: nil)
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -38,11 +79,14 @@ class SecondViewController: UIViewController {
         let ent = NSEntityDescription.entityForName("TaskData", inManagedObjectContext: context)
         
         var newTaskData = TaskData(entity: ent!, insertIntoManagedObjectContext: context)
+        let myImagedata:NSData = UIImagePNGRepresentation(myImage.image)
+        
+        
         
         newTaskData.taskName = txtName.text
         newTaskData.taskDesc = txtDesc.text
         newTaskData.taskAmnt = txtAmount.text
-        //newTaskData.taskImage = myImage.image
+        newTaskData.taskImage = myImagedata
         context.save(nil)
         
         // Clear Text Field
@@ -50,6 +94,9 @@ class SecondViewController: UIViewController {
         txtName.text = ""
         txtDesc.text = ""
         txtAmount.text = ""
+        
+        // Clear Image ??
+//        myImage.image   = "Img1"
 
         
         

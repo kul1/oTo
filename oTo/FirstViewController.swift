@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class FirstViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -24,7 +25,8 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         
-        return 2
+        return tasksList.count
+
     }
     
     // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -32,6 +34,24 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: CustomCell = tableView.dequeueReusableCellWithIdentifier("Cell") as CustomCell
+        
+        let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let context:NSManagedObjectContext = appDel.managedObjectContext!
+        let ent = NSEntityDescription.entityForName("TaskData", inManagedObjectContext: context)
+        let request = NSFetchRequest(entityName: "TaskData")
+        
+        var taskArray:NSArray = context.executeFetchRequest(request, error: nil)!
+        
+        let task:TaskData = taskArray[indexPath.row] as TaskData
+        
+//        cell.setCell(task.taskName, rightLabelText: task.taskDesc, imageName: "img1.jpg")
+        cell.setCell(task.taskName, rightLabelText: task.taskDesc, centerLabelText: task.taskAmnt)
+
+
+
+
+        
+        
         
         if indexPath.row % 2 == 0
         {

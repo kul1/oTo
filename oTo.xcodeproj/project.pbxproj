@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A47CC95219F1646B0054D324 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CC95119F1646B0054D324 /* TaskManager.swift */; };
 		A4824D1219D99DD3009ECF36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4824D1119D99DD3009ECF36 /* AppDelegate.swift */; };
 		A4824D1419D99DD3009ECF36 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4824D1319D99DD3009ECF36 /* FirstViewController.swift */; };
 		A4824D1619D99DD3009ECF36 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4824D1519D99DD3009ECF36 /* SecondViewController.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A47CC95119F1646B0054D324 /* TaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		A4824D0C19D99DD3009ECF36 /* oTo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = oTo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4824D1019D99DD3009ECF36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4824D1119D99DD3009ECF36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 		A4824D0319D99DD3009ECF36 = {
 			isa = PBXGroup;
 			children = (
+				A47CC95119F1646B0054D324 /* TaskManager.swift */,
 				A4824D0E19D99DD3009ECF36 /* oTo */,
 				A4824D2619D99DD3009ECF36 /* oToTests */,
 				A4824D0D19D99DD3009ECF36 /* Products */,
@@ -229,6 +232,7 @@
 				A498271C19EE4C6F008D63A0 /* TaskData.swift in Sources */,
 				A4824D1219D99DD3009ECF36 /* AppDelegate.swift in Sources */,
 				A498271719EE4857008D63A0 /* CustomCell.swift in Sources */,
+				A47CC95219F1646B0054D324 /* TaskManager.swift in Sources */,
 				A4824D1419D99DD3009ECF36 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
