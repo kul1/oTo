@@ -50,7 +50,7 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: NSDictionary!){
         let pickedImage:UIImage = info.objectForKey(UIImagePickerControllerOriginalImage) as UIImage
         // smapp picture
-        let smallPicture = scaleImageWith(pickedImage, newSize: CGSizeMake(100, 100))
+        let smallPicture = scaleImageWith(pickedImage, newSize: CGSizeMake(300, 300))
         
         var sizeOfImageView:CGRect = myImage.frame
         sizeOfImageView.size = smallPicture.size
