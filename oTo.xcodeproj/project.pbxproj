@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4642CD219F5892B0039AABD /* SwiftCoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4642CD119F5892B0039AABD /* SwiftCoreDataHelper.swift */; };
 		A47CC95219F1646B0054D324 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CC95119F1646B0054D324 /* TaskManager.swift */; };
 		A4824D1219D99DD3009ECF36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4824D1119D99DD3009ECF36 /* AppDelegate.swift */; };
 		A4824D1419D99DD3009ECF36 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4824D1319D99DD3009ECF36 /* FirstViewController.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A4642CD119F5892B0039AABD /* SwiftCoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftCoreDataHelper.swift; path = /Users/Kul/Desktop/completed/SwiftCoreDataHelper.swift; sourceTree = "<absolute>"; };
 		A47CC95119F1646B0054D324 /* TaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		A4824D0C19D99DD3009ECF36 /* oTo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = oTo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4824D1019D99DD3009ECF36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				A4824D1119D99DD3009ECF36 /* AppDelegate.swift */,
+				A48F78CC19F9685200ACEA6C /* Helper Class */,
 				A4824D1319D99DD3009ECF36 /* FirstViewController.swift */,
 				A498271619EE4857008D63A0 /* CustomCell.swift */,
 				A4824D1519D99DD3009ECF36 /* SecondViewController.swift */,
@@ -125,6 +128,14 @@
 				A4824D2819D99DD3009ECF36 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A48F78CC19F9685200ACEA6C /* Helper Class */ = {
+			isa = PBXGroup;
+			children = (
+				A4642CD119F5892B0039AABD /* SwiftCoreDataHelper.swift */,
+			);
+			name = "Helper Class";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +242,7 @@
 				A4824D1619D99DD3009ECF36 /* SecondViewController.swift in Sources */,
 				A498271C19EE4C6F008D63A0 /* TaskData.swift in Sources */,
 				A4824D1219D99DD3009ECF36 /* AppDelegate.swift in Sources */,
+				A4642CD219F5892B0039AABD /* SwiftCoreDataHelper.swift in Sources */,
 				A498271719EE4857008D63A0 /* CustomCell.swift in Sources */,
 				A47CC95219F1646B0054D324 /* TaskManager.swift in Sources */,
 				A4824D1419D99DD3009ECF36 /* FirstViewController.swift in Sources */,

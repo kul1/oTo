@@ -73,21 +73,30 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     @IBAction func add_Button(sender: AnyObject) {
         println("Add Button Clicked")
-        // Prepare to access TaskData through TaskManager
-        let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let context:NSManagedObjectContext = appDel.managedObjectContext!
-        let ent = NSEntityDescription.entityForName("TaskData", inManagedObjectContext: context)
+//        // Prepare to access TaskData through TaskManager
+//        let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+//        let context:NSManagedObjectContext = appDel.managedObjectContext!
+//        let ent = NSEntityDescription.entityForName("TaskData", inManagedObjectContext: context)
+//        
+//        var newTaskData = TaskData(entity: ent!, insertIntoManagedObjectContext: context)
+//        
+        let moc:NSManagedObjectContext = SwiftCoreDataHelper.managedObjectContext()
+        var newTaskData:TaskData = SwiftCoreDataHelper.insertManagedObject(NSStringFromClass(TaskData), managedObjectConect: moc)
+         as TaskData
         
-        var newTaskData = TaskData(entity: ent!, insertIntoManagedObjectContext: context)
+        
+        
         let myImagedata:NSData = UIImagePNGRepresentation(myImage.image)
+
         
-        
-        
+        newTaskData.identifier = "\(NSDate())"
         newTaskData.taskName = txtName.text
         newTaskData.taskDesc = txtDesc.text
         newTaskData.taskAmnt = txtAmount.text
         newTaskData.taskImage = myImagedata
-        context.save(nil)
+        
+//        context.save(nil)
+        SwiftCoreDataHelper.saveManagedObjectContext(moc)
         
         // Clear Text Field
         
@@ -96,11 +105,10 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
         txtAmount.text = ""
         
         // Clear Image ??
-//        myImage.image   = "Img1"
-
+        myImage.image   = UIImage(named: "Image.jpg")
         
-        
-        
+        self.navigationController?.popViewControllerAnimated(true)
+     
     }
 
 }
