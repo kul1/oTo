@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+// Global name for our local png photo
+let noPhotoPNG = "Image.jpg"
 
 class FirstViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -22,6 +24,44 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
         loadData()  
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    
+    // Prepare for Segue FullViewSeque
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "FullViewSeque"){
+            //Pass the data to the new viewController
+            let controller: FullViewController = segue.destinationViewController as FullViewController
+            
+            
+            let indexPath: NSIndexPath = self.FirstView.indexPathForCell(sender as UITableViewCell)!
+            
+            
+            //Fetch the data from CoreData
+            let appDel = (UIApplication.sharedApplication().delegate as AppDelegate)
+            let context = appDel.managedObjectContext
+            let request = NSFetchRequest(entityName: "TaskData")
+            request.returnsObjectsAsFaults = false
+            
+            let results: NSArray = context?.executeFetchRequest(request, error: nil) as NSArray!
+            
+            //Get the data for selected cell
+            let fullTask: TaskData = results[indexPath.row] as TaskData
+            println("photoFullURL from First = \(fullTask.photoFullURL)")
+
+            // Pass the data to the next view controller
+            
+            controller.photoFullURL  = fullTask.photoFullURL
+            
+            
+            
+        }
+    }
+    
+    
+    
+    
+    
 
     // Add to follow ContactU
     
@@ -38,24 +78,24 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        println(tasks.count)
         return tasks.count
     }
     
     func loadData(){
         tasks.removeAllObjects()
+        println("There area \(tasks.count) task.count at begin loadData ")
 
 
-        let moc:NSManagedObjectContext = SwiftCoreDataHelper.managedObjectContext()
-        let results:NSArray = SwiftCoreDataHelper.fetchEntities(NSStringFromClass(TaskData), withPredicate: nil, managedObjectContext: moc)
+//        let moc:NSManagedObjectContext = SwiftCoreDataHelper.managedObjectContext()
+//        let results:NSArray = SwiftCoreDataHelper.fetchEntities(NSStringFromClass(TaskData), withPredicate: nil, managedObjectContext: moc)
        
         
-//        let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-//        let context:NSManagedObjectContext = appDel.managedObjectContext!
-//        let ent = NSEntityDescription.entityForName("TaskData", inManagedObjectContext: context)
-//        let request = NSFetchRequest(entityName: "TaskData")
-//        request.returnsObjectsAsFaults = false
-//        var results:NSArray = context.executeFetchRequest(request, error: nil)!
+        let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let moc:NSManagedObjectContext = appDel.managedObjectContext!
+        let ent = NSEntityDescription.entityForName("TaskData", inManagedObjectContext: moc)
+        let request = NSFetchRequest(entityName: "TaskData")
+        request.returnsObjectsAsFaults = false
+        var results:NSArray = moc.executeFetchRequest(request, error: nil)!
         
         if results.count > 0 {
             for task  in results{
@@ -63,6 +103,8 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
                 let singleTask:TaskData = task as TaskData
                 let identifier = singleTask.identifier
                 let name = singleTask.taskName
+                let photoFullURL = singleTask.photoFullURL
+                let photoThumbURL = singleTask.photoThumbURL
                 let desc = singleTask.taskDesc
                 let amnt = singleTask.taskAmnt
                 let image:UIImage = UIImage()
@@ -72,8 +114,8 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
                     let image:UIImage = UIImage(named:"Image.jpg")!
                 }
                 
-                let taskDict:NSDictionary = ["name":name,"desc":desc, "amount":amnt, "image":image, "identifier":identifier]
-                
+                let taskDict:NSDictionary = ["name":name,"desc":desc, "amount":amnt, "image":image, "identifier":identifier, "photoFullURL": photoFullURL, "photoThumbURL": photoThumbURL]
+
                 tasks.addObject(taskDict)
             }
             
@@ -105,7 +147,27 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
         let taskDesc = infoDict.objectForKey("desc")! as String
         let taskAmnt = infoDict.objectForKey("amount") as String
         
-//        let imageData = infoDict.objectForKey("image") as UIImage
+//        let imageData = infoDict.objectForKey("image") as NSData
+        let photoFullURL = infoDict.objectForKey("photoFullURL") as String
+        let photoThumbURL = infoDict.objectForKey("photoThumbURL") as String
+
+        // 
+        //get contents and put into cell
+
+        
+        
+        let noPhotoStr = NSURL(fileURLWithPath: noPhotoPNG)?.absoluteString!
+        
+        if(photoFullURL != noPhotoStr){
+            let paths: NSArray = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+            let documentsDir: NSString = paths.objectAtIndex(0) as NSString
+            
+            let path: NSString = documentsDir.stringByAppendingString(photoFullURL)
+            cell.cellImage.image = UIImage(contentsOfFile: path)
+//            println(" photoFullURL = \(path)")
+        }else{
+            cell.cellImage.image = UIImage(named: "Image.jpg")
+        }
 
     
         
@@ -114,19 +176,11 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
         var taskImageFrame:CGRect = cell.cellImage.frame
         taskImageFrame.size = CGSize(width: 75,height: 75)
         cell.cellImage.frame = taskImageFrame
-        cell.cellImage.image = (infoDict.objectForKey("image") as UIImage)
-//        cell.cellImage.image = UIImage(named: "Image.jpg")
+
 
     
         cell.setCell(taskName, rightLabelText: taskDesc, centerLabelText: taskAmnt)
-//        
-//        if (infoDict.objectForKey("image") != nil) {
-//            cell.cellImage = infoDict.objectForKey("image")! as UIImageView
-//        }
-//        else {
-//            cell.cellImage.image = UIImage(named: "Image.jpg")
-//        }
-        
+
         
         
                 if indexPath.row % 2 == 0
@@ -144,7 +198,7 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath){
         if editingStyle == .Delete{
 
-        self.tasks.removeObjectAtIndex(indexPath.row)
+//        self.tasks.removeObjectAtIndex(indexPath.row)
 
         
         
@@ -153,26 +207,43 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
             println("Deleted  ")
             println(self.tasks.count)
             let infoDict:NSDictionary = self.tasks.objectAtIndex(indexPath.row) as NSDictionary
-            let moc:NSManagedObjectContext = SwiftCoreDataHelper.managedObjectContext()
+//            let moc:NSManagedObjectContext = SwiftCoreDataHelper.managedObjectContext()
+//            let moc:NSManagedObjectContext = appDel.managedObjectContext!
+//            let identifier:NSString = infoDict.objectForKey("identifier") as NSString
+//            let predicate:NSPredicate = NSPredicate(format: "identifier == '\(identifier)'")!
+//            let results:NSArray = appDel.fetchEntities(NSStringFromClass(TaskData), withPredicate: predicate, managedObjectContext: moc)
+
+//
             let identifier:NSString = infoDict.objectForKey("identifier") as NSString
+            
+            println ("identifier before delete == '\(identifier)'")
+
             let predicate:NSPredicate = NSPredicate(format: "identifier == '\(identifier)'")!
-            let results:NSArray = SwiftCoreDataHelper.fetchEntities(NSStringFromClass(TaskData), withPredicate: predicate, managedObjectContext: moc)
-        
+
+            let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            let moc:NSManagedObjectContext = appDel.managedObjectContext!
+
+            let request = NSFetchRequest(entityName: "TaskData")
+            request.returnsObjectsAsFaults = false
+            var results:NSArray = moc.executeFetchRequest(request, error: nil)!
+         
             let taskToDelete:TaskData = results.lastObject as TaskData
             
             taskToDelete.managedObjectContext?.deleteObject(taskToDelete)
-            
-            println("after delete \(tasks.count)")
-            println ("identifier == '\(identifier)'")
 
-            SwiftCoreDataHelper.saveManagedObjectContext(moc)
+            println("after delete \(tasks.count)")
+
+//            SwiftCoreDataHelper.saveManagedObjectContext(moc)
+            moc.save(nil)
             
-            loadData()
+//            loadData()
             self.FirstView.reloadData()
 
         }
             println("after delete \(tasks.count)")
         }
+            loadData()
+
         
         self.FirstView.reloadData()
     
