@@ -16,5 +16,6 @@ class TaskData: NSManagedObject {
     @NSManaged var taskDesc: String
     @NSManaged var taskAmnt: String
     @NSManaged var taskImage: NSData
-
+    @NSManaged var photoThumbURL: String
+    @NSManaged var photoFullURL: String
 }
