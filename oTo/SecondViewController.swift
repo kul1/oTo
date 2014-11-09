@@ -124,7 +124,7 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
             
             //  Create the thumbnail from the original image
             let thumbnailImage: UIImage = self.scaledImageWithImage(newImage, size: CGSize(width: 100, height: 100))
-            self.photoThumbURL = NSString(format: "/@_THUMB.png", theDate)
+            self.photoThumbURL = NSString(format: "/%@_THUMB.png", theDate)
             
             // Save the thumbnail image
             let pathThumb: NSString = documentsDir.stringByAppendingString(self.photoThumbURL)

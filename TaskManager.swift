@@ -39,9 +39,9 @@ class TaskManager: NSObject {
     
     func save(){
         let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let context:NSManagedObjectContext = appDel.managedObjectContext!
-        let ent = NSEntityDescription.entityForName("TaskData", inManagedObjectContext: context)
-        context.save(nil)
+        let moc:NSManagedObjectContext = appDel.managedObjectContext!
+        let ent = NSEntityDescription.entityForName("TaskData", inManagedObjectContext: moc)
+        moc.save(nil)
     }
     
     

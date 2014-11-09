@@ -33,28 +33,59 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
             //Pass the data to the new viewController
             let controller: FullViewController = segue.destinationViewController as FullViewController
             
+// These codes won't work 
+// record shift !!!
+//            let indexPath: NSIndexPath = self.FirstView.indexPathForCell(sender as UITableViewCell)!
+//            
+//            
+//            //Fetch the data from CoreData
+//            let appDel = (UIApplication.sharedApplication().delegate as AppDelegate)
+//            let context = appDel.managedObjectContext
+//            let request = NSFetchRequest(entityName: "TaskData")
+//            request.returnsObjectsAsFaults = false
+//            
+//            let results: NSArray = context?.executeFetchRequest(request, error: nil) as NSArray!
+//            
+//            //Get the data for selected cell
+//            let fullTask: TaskData = results[indexPath.row] as TaskData
+//            println("photoFullURL from segue selected cell = \(fullTask.photoFullURL)")
+//
+//            // Pass the data to the next view controller
+//            
+//            controller.photoFullURL  = fullTask.photoFullURL
+            
             
             let indexPath: NSIndexPath = self.FirstView.indexPathForCell(sender as UITableViewCell)!
             
-            
-            //Fetch the data from CoreData
-            let appDel = (UIApplication.sharedApplication().delegate as AppDelegate)
-            let context = appDel.managedObjectContext
-            let request = NSFetchRequest(entityName: "TaskData")
-            request.returnsObjectsAsFaults = false
-            
-            let results: NSArray = context?.executeFetchRequest(request, error: nil) as NSArray!
-            
-            //Get the data for selected cell
-            let fullTask: TaskData = results[indexPath.row] as TaskData
-            println("photoFullURL from First = \(fullTask.photoFullURL)")
+            if (self.tasks.count > 0){
+                println("Deleted  ")
+                println(" self.tasks.count before seleted= \(self.tasks.count)")
+                let infoDict:NSDictionary = self.tasks.objectAtIndex(indexPath.row) as NSDictionary
 
-            // Pass the data to the next view controller
-            
-            controller.photoFullURL  = fullTask.photoFullURL
-            
-            
-            
+                let identifier:NSString = infoDict.objectForKey("identifier") as NSString
+                
+                println ("identifier before predicate delete == '\(identifier)'")
+                
+                let predicate:NSPredicate = NSPredicate(format: "identifier == '\(identifier)'")!
+                
+                let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+                let moc:NSManagedObjectContext = appDel.managedObjectContext!
+                
+                let request = NSFetchRequest(entityName: "TaskData")
+                request.returnsObjectsAsFaults = false
+                let results:NSArray = appDel.fetchEntities(NSStringFromClass(TaskData), withPredicate: predicate, managedObjectContext: moc)
+                
+                
+                let taskToDelete:TaskData = results.lastObject as TaskData!
+                
+// Pass the data to the next view controller
+               controller.photoFullURL  = taskToDelete.photoFullURL
+                
+                println("tasks count after show photoFull = \(tasks.count)")
+                println("fetch results =  \(results.count)")
+
+            }
+           
         }
     }
     
@@ -83,7 +114,7 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func loadData(){
         tasks.removeAllObjects()
-        println("There area \(tasks.count) task.count at begin loadData ")
+        println("There area \(tasks.count) tasks.count at begin loadData ")
 
 
 //        let moc:NSManagedObjectContext = SwiftCoreDataHelper.managedObjectContext()
@@ -122,6 +153,8 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
             let dateDescriptor:NSSortDescriptor = NSSortDescriptor(key: "name", ascending: true)
             var sortedArray:NSArray = tasks.sortedArrayUsingDescriptors([dateDescriptor])
             tasks = NSMutableArray(array: sortedArray)
+            
+            println("There are \(tasks.count) tasks.count at end loadData")
             
             
 //            reloadInputViews()
@@ -164,7 +197,7 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
             
             let path: NSString = documentsDir.stringByAppendingString(photoFullURL)
             cell.cellImage.image = UIImage(contentsOfFile: path)
-//            println(" photoFullURL = \(path)")
+            println(" photoFullURL = \(path)")
         }else{
             cell.cellImage.image = UIImage(named: "Image.jpg")
         }
@@ -196,16 +229,24 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
         
     }
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath){
-        if editingStyle == .Delete{
+        
 
-//        self.tasks.removeObjectAtIndex(indexPath.row)
+
+
+//
+//            moc.deleteObject(tasks.objectAtIndex(indexPath.row) as NSManagedObject)
+//            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+
+
+            
 
         
         
 
         if (self.tasks.count > 0){
             println("Deleted  ")
-            println(self.tasks.count)
+            println(" self.tasks.count before deleted= \(self.tasks.count)")
             let infoDict:NSDictionary = self.tasks.objectAtIndex(indexPath.row) as NSDictionary
 //            let moc:NSManagedObjectContext = SwiftCoreDataHelper.managedObjectContext()
 //            let moc:NSManagedObjectContext = appDel.managedObjectContext!
@@ -216,33 +257,40 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
 //
             let identifier:NSString = infoDict.objectForKey("identifier") as NSString
             
-            println ("identifier before delete == '\(identifier)'")
+            println ("identifier before predicate delete == '\(identifier)'")
 
             let predicate:NSPredicate = NSPredicate(format: "identifier == '\(identifier)'")!
 
             let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
             let moc:NSManagedObjectContext = appDel.managedObjectContext!
-
+            
             let request = NSFetchRequest(entityName: "TaskData")
             request.returnsObjectsAsFaults = false
-            var results:NSArray = moc.executeFetchRequest(request, error: nil)!
-         
-            let taskToDelete:TaskData = results.lastObject as TaskData
+//            var results:NSArray = moc.executeFetchRequest(request, error: nil)!
+            let results:NSArray = appDel.fetchEntities(NSStringFromClass(TaskData), withPredicate: predicate, managedObjectContext: moc)
+            
+            
+            let taskToDelete:TaskData = results.lastObject as TaskData!
+            
+            println("taskToDelete \(taskToDelete.identifier)")
+
             
             taskToDelete.managedObjectContext?.deleteObject(taskToDelete)
 
-            println("after delete \(tasks.count)")
+            println("after delete tasks = \(tasks.count)")
+            println("after delete results =  \(results.count)")
+
 
 //            SwiftCoreDataHelper.saveManagedObjectContext(moc)
+            
             moc.save(nil)
             
-//            loadData()
+            self.loadData()
             self.FirstView.reloadData()
 
-        }
+//        }
             println("after delete \(tasks.count)")
         }
-            loadData()
 
         
         self.FirstView.reloadData()
@@ -259,8 +307,8 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
 
 
         
-}
 
+}
     
 
 
