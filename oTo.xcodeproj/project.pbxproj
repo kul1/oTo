@@ -19,6 +19,7 @@
 		A498271719EE4857008D63A0 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A498271619EE4857008D63A0 /* CustomCell.swift */; };
 		A498271A19EE4A33008D63A0 /* TaskData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A498271819EE4A33008D63A0 /* TaskData.xcdatamodeld */; };
 		A498271C19EE4C6F008D63A0 /* TaskData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A498271B19EE4C6F008D63A0 /* TaskData.swift */; };
+		A4C892251A0FA77900534FFC /* SwiftCoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C892241A0FA77900534FFC /* SwiftCoreDataHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		A498271619EE4857008D63A0 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		A498271919EE4A33008D63A0 /* TaskData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskData.xcdatamodel; sourceTree = "<group>"; };
 		A498271B19EE4C6F008D63A0 /* TaskData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskData.swift; sourceTree = "<group>"; };
+		A4C892241A0FA77900534FFC /* SwiftCoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCoreDataHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 		A48F78CC19F9685200ACEA6C /* Helper Class */ = {
 			isa = PBXGroup;
 			children = (
+				A4C892241A0FA77900534FFC /* SwiftCoreDataHelper.swift */,
 			);
 			name = "Helper Class";
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A498271A19EE4A33008D63A0 /* TaskData.xcdatamodeld in Sources */,
+				A4C892251A0FA77900534FFC /* SwiftCoreDataHelper.swift in Sources */,
 				A4824D1619D99DD3009ECF36 /* SecondViewController.swift in Sources */,
 				A498271C19EE4C6F008D63A0 /* TaskData.swift in Sources */,
 				A4824D1219D99DD3009ECF36 /* AppDelegate.swift in Sources */,

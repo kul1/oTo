@@ -150,20 +150,20 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     @IBAction func add_Button(sender: AnyObject) {
         println("Add Button Clicked")
+        
+//////////
 //        // Prepare to access TaskData through TaskManager
-        let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let moc:NSManagedObjectContext = appDel.managedObjectContext!
-        let ent = NSEntityDescription.entityForName("TaskData", inManagedObjectContext: moc)
+//        let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+//        let moc:NSManagedObjectContext = appDel.managedObjectContext!
+//        let ent = NSEntityDescription.entityForName("TaskData", inManagedObjectContext: moc)
+//        var newTaskData = TaskData(entity: ent!, insertIntoManagedObjectContext: moc)
+//////////
         
-        var newTaskData = TaskData(entity: ent!, insertIntoManagedObjectContext: moc)
-//
-        
-//        
-//        let moc:NSManagedObjectContext = SwiftCoreDataHelper.managedObjectContext()
-//        var newTaskData:TaskData = SwiftCoreDataHelper.insertManagedObject(NSStringFromClass(TaskData), managedObjectConect: moc)
-//         as TaskData
-//        
-//        
+//////////
+        // Prepare to access TaskData through SwiftCoreDataHelper
+        let moc:NSManagedObjectContext = SwiftCoreDataHelper.managedObjectContext()
+        var newTaskData:TaskData = SwiftCoreDataHelper.insertManagedObject(NSStringFromClass(TaskData), managedObjectConect: moc) as TaskData
+//////////
         
         let myImagedata:NSData = UIImagePNGRepresentation(myImage.image)
 
@@ -187,7 +187,13 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
             newTaskData.photoThumbURL = self.photoThumbURL
         }
         
-        context.save(nil)
+        
+        // Save to CoreData
+//        context.save(nil)
+        
+        SwiftCoreDataHelper.saveManagedObjectContext(moc)
+
+        
 // Save Image
         let paths: NSArray = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         let documentsDir: NSString = paths.objectAtIndex(0) as NSString

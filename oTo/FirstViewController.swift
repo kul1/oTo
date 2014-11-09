@@ -33,26 +33,7 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
             //Pass the data to the new viewController
             let controller: FullViewController = segue.destinationViewController as FullViewController
             
-// These codes won't work 
-// record shift !!!
-//            let indexPath: NSIndexPath = self.FirstView.indexPathForCell(sender as UITableViewCell)!
-//            
-//            
-//            //Fetch the data from CoreData
-//            let appDel = (UIApplication.sharedApplication().delegate as AppDelegate)
-//            let context = appDel.managedObjectContext
-//            let request = NSFetchRequest(entityName: "TaskData")
-//            request.returnsObjectsAsFaults = false
-//            
-//            let results: NSArray = context?.executeFetchRequest(request, error: nil) as NSArray!
-//            
-//            //Get the data for selected cell
-//            let fullTask: TaskData = results[indexPath.row] as TaskData
-//            println("photoFullURL from segue selected cell = \(fullTask.photoFullURL)")
-//
-//            // Pass the data to the next view controller
-//            
-//            controller.photoFullURL  = fullTask.photoFullURL
+
             
             
             let indexPath: NSIndexPath = self.FirstView.indexPathForCell(sender as UITableViewCell)!
@@ -62,24 +43,25 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
                 println(" self.tasks.count before seleted= \(self.tasks.count)")
                 let infoDict:NSDictionary = self.tasks.objectAtIndex(indexPath.row) as NSDictionary
 
+//                let identifier:NSString = infoDict.objectForKey("identifier") as NSString
+////                println ("identifier before predicate delete == '\(identifier)'")
+//                let predicate:NSPredicate = NSPredicate(format: "identifier == '\(identifier)'")!
+//                let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+//                let moc:NSManagedObjectContext = appDel.managedObjectContext!
+//                let request = NSFetchRequest(entityName: "TaskData")
+//                request.returnsObjectsAsFaults = false
+//                let results:NSArray = appDel.fetchEntities(NSStringFromClass(TaskData), withPredicate: predicate, managedObjectContext: moc)
+                
+////
+                let moc:NSManagedObjectContext = SwiftCoreDataHelper.managedObjectContext()
                 let identifier:NSString = infoDict.objectForKey("identifier") as NSString
-                
-                println ("identifier before predicate delete == '\(identifier)'")
-                
                 let predicate:NSPredicate = NSPredicate(format: "identifier == '\(identifier)'")!
-                
-                let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-                let moc:NSManagedObjectContext = appDel.managedObjectContext!
-                
-                let request = NSFetchRequest(entityName: "TaskData")
-                request.returnsObjectsAsFaults = false
                 let results:NSArray = appDel.fetchEntities(NSStringFromClass(TaskData), withPredicate: predicate, managedObjectContext: moc)
-                
-                
-                let taskToDelete:TaskData = results.lastObject as TaskData!
+////
+                let taskToSelect:TaskData = results.lastObject as TaskData!
                 
 // Pass the data to the next view controller
-               controller.photoFullURL  = taskToDelete.photoFullURL
+               controller.photoFullURL  = taskToSelect.photoFullURL
                 
                 println("tasks count after show photoFull = \(tasks.count)")
                 println("fetch results =  \(results.count)")
@@ -117,16 +99,16 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
         println("There area \(tasks.count) tasks.count at begin loadData ")
 
 
-//        let moc:NSManagedObjectContext = SwiftCoreDataHelper.managedObjectContext()
-//        let results:NSArray = SwiftCoreDataHelper.fetchEntities(NSStringFromClass(TaskData), withPredicate: nil, managedObjectContext: moc)
+        let moc:NSManagedObjectContext = SwiftCoreDataHelper.managedObjectContext()
+        let results:NSArray = SwiftCoreDataHelper.fetchEntities(NSStringFromClass(TaskData), withPredicate: nil, managedObjectContext: moc)
        
         
-        let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let moc:NSManagedObjectContext = appDel.managedObjectContext!
-        let ent = NSEntityDescription.entityForName("TaskData", inManagedObjectContext: moc)
-        let request = NSFetchRequest(entityName: "TaskData")
-        request.returnsObjectsAsFaults = false
-        var results:NSArray = moc.executeFetchRequest(request, error: nil)!
+//        let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+//        let moc:NSManagedObjectContext = appDel.managedObjectContext!
+//        let ent = NSEntityDescription.entityForName("TaskData", inManagedObjectContext: moc)
+//        let request = NSFetchRequest(entityName: "TaskData")
+//        request.returnsObjectsAsFaults = false
+//        var results:NSArray = moc.executeFetchRequest(request, error: nil)!
         
         if results.count > 0 {
             for task  in results{
@@ -248,26 +230,27 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
             println("Deleted  ")
             println(" self.tasks.count before deleted= \(self.tasks.count)")
             let infoDict:NSDictionary = self.tasks.objectAtIndex(indexPath.row) as NSDictionary
-//            let moc:NSManagedObjectContext = SwiftCoreDataHelper.managedObjectContext()
-//            let moc:NSManagedObjectContext = appDel.managedObjectContext!
-//            let identifier:NSString = infoDict.objectForKey("identifier") as NSString
-//            let predicate:NSPredicate = NSPredicate(format: "identifier == '\(identifier)'")!
-//            let results:NSArray = appDel.fetchEntities(NSStringFromClass(TaskData), withPredicate: predicate, managedObjectContext: moc)
+            
+            
+            let moc:NSManagedObjectContext = SwiftCoreDataHelper.managedObjectContext()
+            let identifier:NSString = infoDict.objectForKey("identifier") as NSString
+            let predicate:NSPredicate = NSPredicate(format: "identifier == '\(identifier)'")!
+            let results:NSArray = appDel.fetchEntities(NSStringFromClass(TaskData), withPredicate: predicate, managedObjectContext: moc)
 
 //
-            let identifier:NSString = infoDict.objectForKey("identifier") as NSString
-            
-            println ("identifier before predicate delete == '\(identifier)'")
-
-            let predicate:NSPredicate = NSPredicate(format: "identifier == '\(identifier)'")!
-
-            let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-            let moc:NSManagedObjectContext = appDel.managedObjectContext!
-            
-            let request = NSFetchRequest(entityName: "TaskData")
-            request.returnsObjectsAsFaults = false
-//            var results:NSArray = moc.executeFetchRequest(request, error: nil)!
-            let results:NSArray = appDel.fetchEntities(NSStringFromClass(TaskData), withPredicate: predicate, managedObjectContext: moc)
+//            let identifier:NSString = infoDict.objectForKey("identifier") as NSString
+//            
+//            println ("identifier before predicate delete == '\(identifier)'")
+//
+//            let predicate:NSPredicate = NSPredicate(format: "identifier == '\(identifier)'")!
+//
+//            let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+//            let moc:NSManagedObjectContext = appDel.managedObjectContext!
+//            
+//            let request = NSFetchRequest(entityName: "TaskData")
+//            request.returnsObjectsAsFaults = false
+////            var results:NSArray = moc.executeFetchRequest(request, error: nil)!
+//            let results:NSArray = appDel.fetchEntities(NSStringFromClass(TaskData), withPredicate: predicate, managedObjectContext: moc)
             
             
             let taskToDelete:TaskData = results.lastObject as TaskData!
@@ -279,11 +262,12 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
 
             println("after delete tasks = \(tasks.count)")
             println("after delete results =  \(results.count)")
-
-
-//            SwiftCoreDataHelper.saveManagedObjectContext(moc)
             
-            moc.save(nil)
+            // Save
+
+
+            SwiftCoreDataHelper.saveManagedObjectContext(moc)
+//            moc.save(nil)
             
             self.loadData()
             self.FirstView.reloadData()
