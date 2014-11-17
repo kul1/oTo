@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class SecondViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SecondViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var photoFullURL: String!
     var photoThumbURL: String!
@@ -23,6 +23,9 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @IBOutlet weak var myImage: UIImageView! = UIImageView()
     
+//    txtName.delegate=self
+//    txtDesc.delegate=self
+//    txtAmount.delegate=self
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +41,30 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
         textField.resignFirstResponder();
         return true
     }
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
+    
 
+    @IBAction func chooseCamera(sender: AnyObject) {
+        if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
+            //load the camera interface
+            var picker : UIImagePickerController = UIImagePickerController()
+            picker.sourceType = UIImagePickerControllerSourceType.Camera
+            picker.delegate = self
+            picker.allowsEditing = false
+            self.presentViewController(picker, animated: true, completion: nil)
+        }else{
+            //no camera available
+            var alert = UIAlertController(title: "Error", message: "There is no camera available", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler: {(alertAction)in
+                alert.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+    }
     
     func chooseImage(recognizer: UITapGestureRecognizer){
         let imagePicker:UIImagePickerController = UIImagePickerController()
